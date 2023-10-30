@@ -186,7 +186,6 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                 <div className=" flex justify-center items-center flex-col">
                   <div className="w-[320px] h-[240px]">
                     <Webcam
-                      onUserMedia={handleWebcamLoad}
                       audio={false}
                       ref={webcamRef as unknown as React.RefObject<Webcam>}
                       screenshotFormat="image/jpeg"
@@ -316,7 +315,6 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                 <div className=" flex justify-center items-center flex-col">
                   <div className="w-[320px] h-[240px]">
                     <Webcam
-                      onUserMedia={handleWebcamLoad}
                       audio={false}
                       ref={webcamRef as unknown as React.RefObject<Webcam>}
                       screenshotFormat="image/jpeg"
