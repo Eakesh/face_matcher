@@ -73,9 +73,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
 
   return (
     <div className="flex flex-col md:flex-col justify-center items-center">
-      <h1 className="text-3xl font-bold m-4 text-center">
-        Image Uploader and Camera
-      </h1>
+      <h1 className="text-3xl font-bold m-4 text-center">Face Matcher</h1>
       <div>
         <div className="flex flex-col justify-center items-center md:flex-row md:flex md:justify-center md:items-center">
           {/* The first image upload */}
@@ -86,7 +84,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                   className="md:w-[360px] md:h-[280px] w-[250px] h-[250px] my-4 md:mt-0 bg-gray-200 hover:border-2 border-black rounded-xl flex justify-center items-center"
                   onClick={() => setState1({ ...state1, modalIsOpen: true })}
                 >
-                  no image uploaded
+                  Upload Image
                 </div>
                 <button
                   className="w-40 bg-blue-400 h-10 m-2 rounded-xl hover:shadow-xl"
@@ -122,7 +120,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                   margin: "auto",
                 },
                 content: {
-                  width: "90%",
+                  width: "80%",
                   display: "flex",
                   flexWrap: "wrap",
                   flexDirection: "column",
@@ -132,10 +130,21 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                   padding: "20px",
                 },
               }}
+              shouldCloseOnEsc
               isOpen={state1.modalIsOpen}
-              onRequestClose={() => setState1({ ...state1, modalIsOpen: true })}
+              onRequestClose={() =>
+                setState1({ ...state1, modalIsOpen: false })
+              }
               contentLabel="Upload Image Modal"
             >
+              <div className="flex justify-end my-2">
+                <button
+                  className="mt-[-20px] mr-[-10px]"
+                  onClick={() => setState1({ ...state1, modalIsOpen: false })}
+                >
+                  X
+                </button>
+              </div>
               <h1 className="text-center text-3xl font-bold">
                 Upload an Image
               </h1>
@@ -146,7 +155,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                     name="source"
                     value="computer"
                     className="mx-2"
-                    checked={state2.source === "computer"}
+                    checked={state1.source === "computer"}
                     onChange={() =>
                       setState1({ ...state1, source: "computer" })
                     }
@@ -165,7 +174,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                   Capture with Webcam
                 </label>
               </div>
-              {state2.source === "computer" && (
+              {state1.source === "computer" && (
                 <Dropzone
                   onDrop={(acceptedFiles, fileRejections) => {
                     onDrop(acceptedFiles, fileRejections, true);
@@ -176,13 +185,13 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                       {...getRootProps()}
                       className="dropzone flex h-[200px] md:h-[400px] w-full justify-center"
                     >
-                      <input {...getInputProps()} />
+                      <input {...getInputProps()} accept="image/*" />
                       <p>Drag & drop an image here, or click to select one.</p>
                     </div>
                   )}
                 </Dropzone>
               )}
-              {state2.source === "webcam" && (
+              {state1.source === "webcam" && (
                 <div className=" flex justify-center items-center flex-col">
                   <div className="w-[320px] h-[240px]">
                     <Webcam
@@ -204,7 +213,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
             </Modal>
           </div>
           {/* the separator */}
-          <div className="h-[2px] bg-black w-[300px] md:w-[2px] md:h-[300px]"></div>
+          <div className="h-[2px] bg-black w-[300px] md:w-[2px] md:h-[350px]"></div>
           {/* the second upload */}
           <div className="mt-6 md:mb-0 mb-6">
             {!state2.image ? (
@@ -213,7 +222,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                   className="md:w-[360px] md:h-[280px] w-[250px] h-[250px] my-4 md:mt-0 bg-gray-200 hover:border-2 border-black rounded-xl flex justify-center items-center"
                   onClick={() => setState2({ ...state2, modalIsOpen: true })}
                 >
-                  no image uploaded
+                  Upload Image
                 </div>
                 <button
                   className="w-40 bg-blue-400 h-10 m-2 rounded-xl hover:shadow-xl"
@@ -249,7 +258,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                   margin: "auto",
                 },
                 content: {
-                  width: "90%",
+                  width: "80%",
                   display: "flex",
                   flexWrap: "wrap",
                   flexDirection: "column",
@@ -265,6 +274,14 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
               }
               contentLabel="Upload Image Modal"
             >
+              <div className="flex justify-end my-2">
+                <button
+                  className="mt-[-20px] mr-[-10px]"
+                  onClick={() => setState2({ ...state2, modalIsOpen: false })}
+                >
+                  X
+                </button>
+              </div>
               <h1 className="text-center text-3xl font-bold">
                 Upload an Image
               </h1>
@@ -305,7 +322,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                       {...getRootProps()}
                       className="dropzone flex h-[200px] md:h-[400px] w-full justify-center"
                     >
-                      <input {...getInputProps()} />
+                      <input {...getInputProps()} accept="image/*" />
                       <p>Drag & drop an image here, or click to select one.</p>
                     </div>
                   )}
