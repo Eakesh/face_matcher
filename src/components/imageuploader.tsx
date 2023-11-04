@@ -60,14 +60,18 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
   };
 
   async function submitHandler() {
-    setisLoading(true);
-    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    setisLoading(true); //don't change this line it is for the loading spinner animation
 
+    console.log(state1.image, state2.image);
+    //the above two are the images variable\
+
+    //send the request here
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
     const data = await res.json();
+
+    //don't change the next three lines it also for the loading spinner animation
     if (data) {
-      setTimeout(() => {
-        setisLoading(false);
-      }, 2000);
+      setisLoading(false);
     }
   }
 
@@ -160,7 +164,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                       setState1({ ...state1, source: "computer" })
                     }
                   />
-                  Upload from Computer
+                  Upload from this device
                 </label>
                 <label>
                   <input
@@ -201,7 +205,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                     />
                   </div>
                   <button
-                    className="top-6 relative w-40 h-10 bg-blue-400 rounded-xl"
+                    className="top-6 relative w-40 h-10 bg-blue-400 rounded-xl hover:shadow-xl"
                     onClick={() => {
                       captureImage(true);
                     }}
@@ -213,7 +217,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
             </Modal>
           </div>
           {/* the separator */}
-          <div className="h-[2px] bg-black w-[300px] md:w-[2px] md:h-[350px]"></div>
+          <div className="h-[2px] bg-black w-[300px] md:w-[2px] md:h-[350px] md:mb-4 "></div>
           {/* the second upload */}
           <div className="mt-6 md:mb-0 mb-6">
             {!state2.image ? (
@@ -297,7 +301,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
                       setState2({ ...state2, source: "computer" })
                     }
                   />
-                  Upload from Computer
+                  Upload from this device
                 </label>
                 <label>
                   <input
@@ -352,7 +356,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = () => {
         </div>
       </div>
       <button
-        className="bg-blue-300 w-40 h-10 rounded-xl hover:shadow-xl disabled:cursor-not-allowed disabled:bg-gray-300"
+        className="bg-green-400 w-40 h-10 rounded-xl hover:shadow-xl disabled:cursor-not-allowed disabled:bg-gray-300"
         disabled={isloading}
         onClick={() => {
           console.log(state1.image, state2.image);
